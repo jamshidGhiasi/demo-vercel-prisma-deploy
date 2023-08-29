@@ -1,66 +1,67 @@
 import prisma from '../lib/prisma'
 
 async function main() {
-  const response = await Promise.all([
+  const promises = [];
+  promises.push(
     await prisma.area.upsert({
       where: {
         title: 'Villa Ground'
-      }, 
+      },
       update: {},
       create: {
         title: 'Villa Ground',
         slug: 'villa-ground',
-       
+
       },
     }),
     await prisma.area.upsert({
       where: {
         title: 'Villa 1st Floor'
-      }, 
+      },
       update: {},
       create: {
         title: 'Villa 1st Floor',
         slug: 'villa-1st-floor',
-       
+
       },
     }),
     await prisma.area.upsert({
       where: {
         title: 'Villa 2nd Floor'
-      }, 
+      },
       update: {},
       create: {
         title: 'Villa 2nd Floor',
         slug: 'villa-2nd-floor',
-       
+
       },
     }),
     await prisma.area.upsert({
       where: {
         title: 'Colonica'
-      }, 
+      },
       update: {},
       create: {
         title: 'Colonica',
         slug: 'colonica',
-        
+
       },
     }),
     await prisma.area.upsert({
       where: {
         title: 'Other Rooms'
-      }, 
+      },
       update: {},
       create: {
         title: 'Other Rooms',
         slug: 'other-rooms',
-       
+
       },
     }),
     await prisma.antique.upsert({
       where: {
         itemNo: 1
-      }, 
+      },
       update: {
         areaId: 'villa-ground'
       },
@@ -72,7 +73,7 @@ async function main() {
     await prisma.antique.upsert({
       where: {
         itemNo: 2
-      }, 
+      },
       update: {
         areaId: 'villa-1st-floor'
       },
@@ -81,7 +82,9 @@ async function main() {
         areaId: 'villa-1st-floor'
       },
     }),
-  ])
+  )
+
+  const response = await Promise.all(promises)
   console.log(response)
 }
 main()
