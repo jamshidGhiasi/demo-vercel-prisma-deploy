@@ -6,7 +6,7 @@ import TablePlaceholder from '@/components/table-placeholder'
 import ExpandingArrow from '@/components/expanding-arrow'
 import { getServerSession } from 'next-auth'
 import { redirect } from 'next/navigation'
-import { authOptions } from './api/auth/[...nextauth]/route';
+import authOptions from "@/lib/auth-options"
 
 // Prisma does not support Edge without the Data Proxy currently
 // export const runtime = 'edge'
